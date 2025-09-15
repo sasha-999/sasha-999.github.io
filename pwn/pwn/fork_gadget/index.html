@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.8.1">
 <title data-rh="true">fork\_gadget | My Site</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://0xa5h.com/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://0xa5h.com/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://0xa5h.com/pwn/pwn/fork_gadget"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="fork\_gadget | My Site"><meta data-rh="true" name="description" content=" "><meta data-rh="true" property="og:description" content=" "><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://0xa5h.com/pwn/pwn/fork_gadget"><link data-rh="true" rel="alternate" href="https://0xa5h.com/pwn/pwn/fork_gadget" hreflang="en"><link data-rh="true" rel="alternate" href="https://0xa5h.com/pwn/pwn/fork_gadget" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"pwn","item":"https://0xa5h.com/pwn/category/pwn"},{"@type":"ListItem","position":2,"name":"fork\\_gadget","item":"https://0xa5h.com/pwn/pwn/fork_gadget"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="My Site RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="My Site Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b304860a.css">
-<script src="/assets/js/runtime~main.98d18d95.js" defer="defer"></script>
-<script src="/assets/js/main.6f98cfbc.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.cb29188e.js" defer="defer"></script>
+<script src="/assets/js/main.015243ca.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <p>However there are other places where handlers like these are used, and one place I stumbled across when investigating the exit handlers, was the fork handlers, and after some investigation, I found some tricks to abuse the fork handlers to convert <code>fork</code> into a constraintless one gadget.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="cheatsheet">Cheatsheet<a href="#cheatsheet" class="hash-link" aria-label="Direct link to Cheatsheet" title="Direct link to Cheatsheet">​</a></h2>
 <p>Below is a cheatsheet for all the tricks covered in this post:</p>
-<script src="https://gist.github.com/sasha-999/bcafec8de9a5620d8b38d78b7e9693fc.js"></script>
+<div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-are-the-fork-handlers">What are the fork handlers?<a href="#what-are-the-fork-handlers" class="hash-link" aria-label="Direct link to What are the fork handlers?" title="Direct link to What are the fork handlers?">​</a></h2>
 <p><code>fork</code> has its own handlers for multiple situations:</p>
 <ul>
@@ -197,7 +197,7 @@
 <p>So it&#x27;s just as simple as jumping to <code>setcontext+37</code> (or later).</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="detecting-arguments-to-handlers">Detecting arguments to handlers<a href="#detecting-arguments-to-handlers" class="hash-link" aria-label="Direct link to Detecting arguments to handlers" title="Direct link to Detecting arguments to handlers">​</a></h2>
 <p>It can be quite cumbersome to check the disassembly to see what the arguments are going to be ahead of time. That&#x27;s why I wrote a script, just like with <a href="/pwn/pwn/rop-2.34+/ret2gets#detecting-this-behaviour">ret2gets</a>, which will trace <code>fork</code> with <code>angr</code>, and log what the arguments to each call to <code>prepare_handler</code> were.</p>
-<script src="https://gist.github.com/sasha-999/4feff0af21c4d028fd5701e8f11f12c0.js"></script>
+<div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="fork---one_gadget">fork -&gt; one_gadget<a href="#fork---one_gadget" class="hash-link" aria-label="Direct link to fork -&gt; one_gadget" title="Direct link to fork -&gt; one_gadget">​</a></h2>
 <p>So why would we care about this? I mean sure, we can control <code>fork</code> to either execute <code>system</code> for a shell, or <code>setcontext</code> for ROP/shellcode, but that&#x27;s only useful is there are calls to <code>fork</code>. Not all applications will use <code>fork</code> after all.</p>
 <p>What about functions in glibc? Surely some of them will use <code>fork</code>, after all there&#x27;s functions like <code>system</code> which would create a new process to execute a shell command, right?</p>
