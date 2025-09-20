@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://0xa5h.com/blog</id>
-    <title>My Site Blog</title>
+    <title>Pwn Notes Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://0xa5h.com/blog"/>
-    <subtitle>My Site Blog</subtitle>
-    <icon>https://0xa5h.com/img/favicon.ico</icon>
+    <subtitle>Pwn Notes Blog</subtitle>
+    <icon>https://0xa5h.com/img/sunglas.png</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
         <id>https://0xa5h.com/blog/welcome</id>
